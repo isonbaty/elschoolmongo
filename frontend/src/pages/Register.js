@@ -1,16 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
-import { register } from '../features/auth/authSlice';
+import { register, reset } from '../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
+import Loader from '../components/Loader';
 import {
   Button,
-  FormControl,
-  FormLabel,
-  Input,
   Stack,
   Container,
   Box,
-  FormHelperText,
   InputAdornment,
   TextField,
 } from '@mui/material';
@@ -30,7 +28,8 @@ function Register() {
   const { name, email, password, password2 } = formData;
 
   const dispatch = useDispatch();
-  const { user, isLoading, isSuccess, message } = useSelector(
+  const navigate = useNavigate();
+  const { user, isLoading, isSuccess, message, isError } = useSelector(
     (state) => state.auth
   );
 
@@ -40,6 +39,18 @@ function Register() {
       [e.target.name]: e.target.value,
     }));
   };
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    //redirect if success
+    if (isSuccess || user) {
+      navigate('/');
+    }
+    dispatch(reset());
+  }, [user, isSuccess, isError, message, dispatch, navigate]);
+
   const onSubmit = () => {
     if (!name || !email || !password || !password2) {
       toast.error('Please fill all fields');
@@ -56,6 +67,7 @@ function Register() {
     }
   };
 
+  if (isLoading) return <Loader />;
   return (
     <>
       <section className='heading'>

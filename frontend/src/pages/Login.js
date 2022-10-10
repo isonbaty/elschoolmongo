@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { FaSignInAlt } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../features/auth/authSlice';
+import { login, reset } from '../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
+
 import {
   Button,
   Stack,
@@ -10,18 +11,13 @@ import {
   InputAdornment,
   TextField,
   Typography,
-  FormControl,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormLabel,
 } from '@mui/material';
 import { toast } from 'react-toastify';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import Lottie from 'lottie-react';
 import animationData from '../assets/lotties/76212-student-transparent.json';
-
+import Loader from '../components/Loader';
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
@@ -30,10 +26,21 @@ function Login() {
 
   const { email, password } = formData;
   const dispatch = useDispatch();
-  const { user, isLoading, isSuccess, message } = useSelector(
+  const navigate = useNavigate();
+  const { user, isLoading, isSuccess, message, isError } = useSelector(
     (state) => state.auth
   );
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    //redirect if success
+    if (isSuccess || user) {
+      navigate('/');
+    }
+    dispatch(reset());
+  }, [user, isSuccess, message, isError, dispatch, navigate]);
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -51,6 +58,8 @@ function Login() {
       dispatch(login(userData));
     }
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -79,7 +88,7 @@ function Login() {
                 value={email}
                 onChange={onChange}
                 placeholder='Enter your Email'
-                sx={{ width: '100%' }}
+                sx={{ width: '150%' }}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
@@ -99,7 +108,7 @@ function Login() {
                 value={password}
                 onChange={onChange}
                 placeholder='Enter Password'
-                sx={{ width: '100%' }}
+                sx={{ width: '150%' }}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
@@ -109,7 +118,7 @@ function Login() {
                 }}
               />
 
-              <FormControl>
+              {/* <FormControl>
                 <FormLabel id='usertype'>I'm</FormLabel>
                 <RadioGroup
                   row
@@ -133,7 +142,7 @@ function Login() {
                     label='Teacher'
                   />
                 </RadioGroup>
-              </FormControl>
+              </FormControl> */}
 
               <Button variant='contained' color='secondary' onClick={onSubmit}>
                 Submit
