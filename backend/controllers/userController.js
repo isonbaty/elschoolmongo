@@ -56,7 +56,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //create student
   const student = await Student.create({
-    _id: user._id,
     user: user._id,
     parent: parent._id,
     name: '',
@@ -122,7 +121,12 @@ const loginUser = asyncHandler(async (req, res) => {
 //@route  GET /api/users/me
 //@access Private
 const getMe = asyncHandler(async (req, res) => {
-  res.status(200).json(req.user);
+  const user = {
+    _id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+  };
+  res.status(200).json(user);
 });
 
 // Generate token
