@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 const Student = require('../models/studentModel');
 
 //@desc   get current student
-//@route  GET /api/student
+//@route  GET /api/student/:id
 //@access Private
 const getStudent = asyncHandler(async (req, res) => {
   //get student from database using token from id
@@ -14,7 +14,7 @@ const getStudent = asyncHandler(async (req, res) => {
     throw new Error('user not found');
   }
 
-  const student = await Student.findOne({ user: user._id });
+  const student = await Student.findById(req.params.id);
 
   res.status(200).json(student);
 });
