@@ -15,18 +15,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please add a password'],
     },
-    salary: {
-      type: String,
-      default: '',
-    },
-    personal_id: {
-      type: String,
-      default: '',
-    },
-    address: {
-      type: String,
-      default: '',
-    },
+
     isAdmin: {
       type: Boolean,
       required: true,

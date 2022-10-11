@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/userModel');
+const Parent = require('../models/parentModel');
+const Student = require('../models/studentModel');
 
 //@desc   Register a new user
 //@route  POST /api/users
@@ -34,6 +36,39 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password: hashedPassword,
+  });
+
+  // create Parent
+  const parent = await Parent.create({
+    _id: user._id,
+    user: user._id,
+    name: user.name,
+    email: user.email,
+    company: '',
+    profession: '',
+    salary: user.salary,
+    personal_id: user.personal_id,
+    address: '',
+    parent_type: 'father',
+    phone: '',
+    status: 'initiated',
+  });
+
+  //create student
+  const student = await Student.create({
+    _id: user._id,
+    user: user._id,
+    parent: parent._id,
+    name: '',
+    student_id: '000000' + Math.floor(Math.random() * 1000000),
+    grade: '',
+    class_name: '',
+    personal_id: '',
+    address: parent.address,
+    blood_type: 'A+',
+    phone: parent.phone,
+    status: 'initiated',
+    house: 'Dragon',
   });
 
   if (user) {
