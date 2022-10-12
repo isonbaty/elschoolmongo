@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { getParent } = require('../controllers/parentController');
+const { getParent, updateParent } = require('../controllers/parentController');
 
 const { protect } = require('../middleware/authMiddleware');
-router.get('/', protect, getParent);
+router.get('/:id', protect, getParent);
+router.put('/:id', protect, updateParent);
 
 module.exports = router;

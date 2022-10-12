@@ -28,7 +28,7 @@ const studentSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-    class: {
+    class_name: {
       type: String,
       default: '',
     },

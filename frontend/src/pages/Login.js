@@ -144,7 +144,12 @@ function Login() {
                 </RadioGroup>
               </FormControl> */}
 
-              <Button variant='contained' color='secondary' onClick={onSubmit}>
+              <Button
+                variant='contained'
+                color='secondary'
+                onClick={onSubmit}
+                sx={{ width: '150%' }}
+              >
                 Submit
               </Button>
             </Stack>
