@@ -14,8 +14,22 @@ const createStudent = async (studentData, token) => {
   return response.data;
 };
 
-const ticketService = {
-  createStudent,
+// get user's students
+
+const getStudents = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(API_URL, config);
+  return response.data;
 };
 
-export default ticketService;
+const studentService = {
+  createStudent,
+  getStudents,
+};
+
+export default studentService;

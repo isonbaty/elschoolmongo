@@ -10,7 +10,7 @@ const {
 
 const { protect } = require('../middleware/authMiddleware');
 router.get('/:id', protect, getStudent);
-router.get('/all', protect, getStudents);
+router.get('/', protect, getStudents);
 router.delete('/:id', protect, deleteStudent);
 router.put('/:id', protect, updateStudent);
 router.post('/', protect, createStudent);

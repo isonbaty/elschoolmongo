@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import Lottie from 'lottie-react';
+import { Link } from 'react-router-dom';
 import animationData from '../assets/lotties/76212-student-transparent.json';
 import Loader from '../components/Loader';
 function Login() {
@@ -152,6 +153,7 @@ function Login() {
               >
                 Submit
               </Button>
+              <Link to={'/addstudent'}>Add</Link>
             </Stack>
           </Box>
         </Stack>

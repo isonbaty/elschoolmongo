@@ -40,7 +40,7 @@ const getStudents = asyncHandler(async (req, res) => {
     throw new Error('user not found');
   }
 
-  const students = await Student.find({ user: req.user.id });
+  const students = await Student.find({ user: req.user._id });
 
   res.status(200).json(students);
 });

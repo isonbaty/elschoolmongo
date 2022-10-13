@@ -4,11 +4,12 @@ import PrivateRoute from './components/PrivateRoute';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import AddStudent from './pages/CreateStudent';
+import CreateStudent from './pages/CreateStudent';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { deepOrange, blueGrey, yellow } from '@mui/material/colors';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UpdateStudent from './pages/UpdateStudent';
 
 function App() {
   const theme = createTheme({
@@ -36,12 +37,14 @@ function App() {
               <Route path='/' element={<PrivateRoute />}>
                 <Route path='/' element={<Home />} />
               </Route>
-
+              <Route path='/addstudent' element={<PrivateRoute />}>
+                <Route path='/addstudent' element={<CreateStudent />} />
+              </Route>
+              <Route path='/updatestudent' element={<PrivateRoute />}>
+                <Route path='/updatestudent' element={<UpdateStudent />} />
+              </Route>
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />
-              <Route path='/add-student' element={<PrivateRoute />}>
-                <Route path='/add-student' element={<AddStudent />} />
-              </Route>
             </Routes>
           </div>
         </ThemeProvider>

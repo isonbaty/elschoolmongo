@@ -21,7 +21,7 @@ import Loader from '../components/Loader';
 
 function CreateStudent() {
   const { user } = useSelector((state) => state.auth);
-  const { isSuccess, isError, message, isLoading } = useSelector(
+  const { isSuccess, isError, message, isLoading, isCompleted } = useSelector(
     (state) => state.student
   );
 
@@ -47,11 +47,11 @@ function CreateStudent() {
     if (isError) {
       toast.error(message);
     }
-    if (isSuccess) {
+    if (isCompleted) {
       dispatch(reset());
       navigate('/');
     }
-  }, [isSuccess, isError, dispatch, message, navigate]);
+  }, [isCompleted, isError, dispatch, message, navigate]);
   const onSubmit = (e) => {
     if (!name || !personal_id || !birth_date) {
       toast.error('Please fill all fields');
