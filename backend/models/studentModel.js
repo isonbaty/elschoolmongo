@@ -39,6 +39,7 @@ const studentSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+
     blood_type: {
       type: String,
       enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
@@ -77,6 +78,10 @@ const studentSchema = new mongoose.Schema(
       default: 'Healthy',
     },
     class_name: {
+      type: String,
+      default: '',
+    },
+    avurl: {
       type: String,
       default: '',
     },

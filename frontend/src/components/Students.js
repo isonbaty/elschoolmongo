@@ -52,7 +52,53 @@ function Students() {
                       borderColor: 'third.main',
                       minBlockSize: '100%',
                       minHeight: '100%',
+                      minWidth: '200px',
+                      maxWidth: '250px',
                       width: '100%',
+                    }}
+                  >
+                    <Stack spacing='.25rem'>
+                      <Box sx={{ margin: 'auto' }}>
+                        <Avatar
+                          sx={{ width: 50, height: 50 }}
+                          alt={student.name}
+                          src={student.avatar}
+                        />
+                      </Box>
+                      <Typography variant='body2' sx={{ color: 'primary' }}>
+                        {student.name}
+                      </Typography>{' '}
+                      <Typography
+                        variant='body2'
+                        sx={{ color: 'primary', fontWeight: 'bold' }}
+                      ></Typography>
+                      <Button
+                        variant='outlined'
+                        color='secondary'
+                        size='small'
+                        startIcon={<EditIcon />}
+                        component={Link}
+                        to={`/students/${student._id}`}
+                      >
+                        Edit profile
+                      </Button>
+                    </Stack>
+                  </Box>
+                ))}
+              </Stack>
+              <Stack direction='row' spacing={2}>
+                {students.slice(4).map((student) => (
+                  <Box
+                    key={student._id}
+                    padding={2}
+                    sx={{
+                      border: '1px solid',
+                      borderRadius: '5px',
+                      borderColor: 'third.main',
+                      minBlockSize: '100%',
+                      minHeight: '100%',
+                      minWidth: '200px',
+                      maxWidth: '250px',
                     }}
                   >
                     <Stack spacing='.25rem'>
