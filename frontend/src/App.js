@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
+import PrivateRoute from './components/PrivateRoute';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import AddStudent from './pages/CreateStudent';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { deepOrange, blueGrey, yellow } from '@mui/material/colors';
 import { ToastContainer } from 'react-toastify';
@@ -31,9 +33,15 @@ function App() {
           <div className='container'>
             <Header />
             <Routes>
-              <Route path='/' element={<Home />} />
+              <Route path='/' element={<PrivateRoute />}>
+                <Route path='/' element={<Home />} />
+              </Route>
+
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />
+              <Route path='/add-student' element={<PrivateRoute />}>
+                <Route path='/add-student' element={<AddStudent />} />
+              </Route>
             </Routes>
           </div>
         </ThemeProvider>
