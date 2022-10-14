@@ -40,8 +40,8 @@ function App() {
               <Route path='/addstudent' element={<PrivateRoute />}>
                 <Route path='/addstudent' element={<CreateStudent />} />
               </Route>
-              <Route path='/updatestudent' element={<PrivateRoute />}>
-                <Route path='/updatestudent' element={<UpdateStudent />} />
+              <Route path='/students/:id' element={<PrivateRoute />}>
+                <Route path='/students/:id' element={<UpdateStudent />} />
               </Route>
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />

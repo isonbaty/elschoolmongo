@@ -62,7 +62,7 @@ function Students() {
                         <Avatar
                           sx={{ width: 50, height: 50 }}
                           alt={student.name}
-                          src={student.avatar}
+                          src={student.avurl}
                         />
                       </Box>
                       <Typography variant='body2' sx={{ color: 'primary' }}>

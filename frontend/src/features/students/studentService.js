@@ -27,9 +27,37 @@ const getStudents = async (token) => {
   return response.data;
 };
 
+// get user's student
+
+const getStudent = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(`${API_URL}/${id}`, config);
+  return response.data;
+};
+
+// update student
+
+const updateStudent = async (id, studentData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(`${API_URL}/${id}`, studentData, config);
+  return response.data;
+};
+
 const studentService = {
   createStudent,
   getStudents,
+  getStudent,
+  updateStudent,
 };
 
 export default studentService;
